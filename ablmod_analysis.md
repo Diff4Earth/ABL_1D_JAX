@@ -26,38 +26,38 @@
 sbc_abl.F90
 
 ### Arguments
-|        | abl_stp (definition) | sbc_abl (call) |
-| ------ |----------------------|----------------|
-| In     | kt                   | kt             |
-|        | psst                 | sst_m          |
-|        | pssu                 | ssu_m          |
-|        | pssv                 | ssv_m          |
-|        | pssq                 | zssq           |
-|        | pu_dta               | sf(jp_wndi)    |
-|        | pv_dta               | sf(jp_wndj)    |
-|        | pt_dta               | sf(jp_tair)    |
-|        | pq_dta               | sf(jp_humi)    |
-|        | pslp_dta             | sf(jp_slp)     |
-|        | pgu_dta              | sf(jp_hpgi)    |
-|        | pgv_dta              | sf(jp_hpgj)    |
-| In/out | pcd_du               | zcd_du         |
-|        | psen                 | zsen           |
-|        | pevp                 | zevp           |
-|        | pwndm                | wndm           |
-|        | ptaui                | utau           |
-|        | ptauj                | vtau           |
-|        | ptaum                | taum           |
-| Out    | ptm_su               | tm_su          |
-|        | pssu_ice             | u_ice          |
-|        | pssv_ice             | v_ice          |
-|        | pssq_ice             | zssqi          |
-|        | pcd_du_ice           | zcd_dui        |
-|        | psen_ice             | zseni          |
-|        | pevp_ice             | zevpi          |
-|        | pwndm_ice            | wndm_ice       |
-|        | pfrac_oce            | ato_i          |
-|        | ptaui_ice            | utau_ice       |
-|        | ptauj_ice            | vtau_ice       |
+|        | abl_stp (definition) | sbc_abl (call) | Comment in ablmod.F90 |
+| ------ |----------------------|----------------|-----------------------|
+| In     | kt                   | kt             | `time step index`     |
+|        | psst                 | sst_m          | `sea-surface temperature [Celsius]` |
+|        | pssu                 | ssu_m          | `sea-surface u (U-point)` |
+|        | pssv                 | ssv_m          | `sea-surface v (V-point)` |
+|        | pssq                 | zssq           | `sea-surface humidity` |
+|        | pu_dta               | sf(jp_wndi)    | `large-scale windi` |
+|        | pv_dta               | sf(jp_wndj)    | `large-scale windj` |
+|        | pt_dta               | sf(jp_tair)    | `large-scale pot. temp.` |
+|        | pq_dta               | sf(jp_humi)    | `large-scale humidity` |
+|        | pslp_dta             | sf(jp_slp)     | `sea-level pressure` |
+|        | pgu_dta              | sf(jp_hpgi)    | `large-scale hpgi` |
+|        | pgv_dta              | sf(jp_hpgj)    | `large-scale hpgj` |
+| In/out | pcd_du               | zcd_du         | `Cd x Du (T-point)` |
+|        | psen                 | zsen           | `Ch x Du` |
+|        | pevp                 | zevp           | `Ce x Du` |
+|        | pwndm                | wndm           | `\|\|uwnd\|\|` |
+|        | ptaui                | utau           | `taux` |
+|        | ptauj                | vtau           | `tauy` |
+|        | ptaum                | taum           | `\|\|tau\|\|` |
+| Out    | ptm_su               | tm_su          | `ice-surface temperature [K]` |
+|        | pssu_ice             | u_ice          | `ice-surface u (U-point)` |
+|        | pssv_ice             | v_ice          | `ice-surface v (V-point)` |
+|        | pssq_ice             | zssqi          | `ice-surface humidity` |
+|        | pcd_du_ice           | zcd_dui        | `Cd x Du over ice (T-point)` |
+|        | psen_ice             | zseni          | `Ch x Du over ice (T-point)` |
+|        | pevp_ice             | zevpi          | `Ce x Du over ice (T-point)` |
+|        | pwndm_ice            | wndm_ice       | `\|\|uwnd - uice\|\|` |
+|        | pfrac_oce            | ato_i          | |
+|        | ptaui_ice            | utau_ice       | `ice-surface taux stress (U-point)` |
+|        | ptauj_ice            | vtau_ice       | `ice-surface tauy stress (V-point)` |
 
 
 
