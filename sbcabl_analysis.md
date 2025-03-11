@@ -29,12 +29,19 @@
 
 ## Subroutine sbc_abl_init
 
+### Called from
+sbcmod.F90 (src/OCE/SBC)
+
 ### Purposes : 
 - read namelist section namsbc_abl
 - initialize and check parameter values
 - initialize variables of ABL model
 
 ## Subroutine sbc_abl
+
+### Called from
+sbcmod.F90 (src/OCE/SBC)
+
 ### Purpose
 Provide the momentum, heat and freshwater fluxes at the ocean surface from an ABL calculation at each oceanic time step
 
