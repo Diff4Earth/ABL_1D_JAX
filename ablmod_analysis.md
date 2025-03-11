@@ -22,6 +22,21 @@
 
 ## abl_step
 
+### Description from ablmod.F90
+```
+** Purpose :   Time-integration of the ABL model 
+
+** Method  :   Compute atmospheric variables : vertical turbulence 
+                             + Coriolis term + newtonian relaxation
+                
+** Action  : - Advance TKE to time n+1 and compute Avm_abl, Avt_abl, PBLh
+             - Advance tracers to time n+1 (Euler backward scheme)
+             - Compute Coriolis term with forward-backward scheme (possibly with geostrophic guide)
+             - Advance u,v to time n+1 (Euler backward scheme)
+             - Apply newtonian relaxation on the dynamics and the tracers
+             - Finalize flux computation in psen, pevp, pwndm, ptaui, ptauj, ptaum
+```
+
 ### Called from
 sbc_abl.F90
 
@@ -63,6 +78,21 @@ sbc_abl.F90
 
 ## abl_zdf_tke
 
+### Description
+
+```
+** Purpose :   Time-step Turbulente Kinetic Energy (TKE) equation
+
+** Method  : - source term due to shear
+             - source term due to stratification
+             - resolution of the TKE equation by inverting
+               a tridiagonal linear system
+
+** Action  : - en : now turbulent kinetic energy)
+             - avmu, avmv : production of TKE by shear at u and v-points
+               (= Kz dz[Ub] * dz[Un] )
+```
+
 ### Called from
 abl_stp subroutine (same module)
 
@@ -71,6 +101,12 @@ abl_stp subroutine (same module)
 None
 
 ## smooth_pblh
+
+### Description
+
+```
+** Purpose :   2D Hanning filter on atmospheric PBL height
+```
 
 ### Called from
 
