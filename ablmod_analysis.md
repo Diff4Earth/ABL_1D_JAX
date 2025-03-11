@@ -40,8 +40,24 @@ sbc_abl.F90
 |        | pslp_dta             | sf(jp_slp)     |
 |        | pgu_dta              | sf(jp_hpgi)    |
 |        | pgv_dta              | sf(jp_hpgj)    |
-| In/out |                      |                |
-| Out    |                      |                |
+| In/out | pcd_du               | zcd_du         |
+|        | psen                 | zsen           |
+|        | pevp                 | zevp           |
+|        | pwndm                | wndm           |
+|        | ptaui                | utau           |
+|        | ptauj                | vtau           |
+|        | ptaum                | taum           |
+| Out    | ptm_su               | tm_su          |
+|        | pssu_ice             | u_ice          |
+|        | pssv_ice             | v_ice          |
+|        | pssq_ice             | zssqi          |
+|        | pcd_du_ice           | zcd_dui        |
+|        | psen_ice             | zseni          |
+|        | pevp_ice             | zevpi          |
+|        | pwndm_ice            | wndm_ice       |
+|        | pfrac_oce            | ato_i          |
+|        | ptaui_ice            | utau_ice       |
+|        | ptauj_ice            | vtau_ice       |
 
 
 
