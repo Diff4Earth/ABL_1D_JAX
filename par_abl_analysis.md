@@ -3,3 +3,5 @@
 ## Module dependencies
 | Library        | Variable |
 |----------------|----------|
+| par_kind       |          |
+| par_oce        |          |
