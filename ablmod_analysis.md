@@ -1,24 +1,24 @@
 # Analysis of ablmod.F90 module
 
 ## Module dependencies
-* abl
-* par_abl
-* phycst
-* dom_oce
-  * tmask
-* sbc_oce
-  * ght_abl
-  * ghw_abl
-  * e3t_abl
-  * e3w_abl
-  * jpka
-  * jpkam1
-* sbcblk
-* prtctl
-* iom
-* in_out_manager
-* lib_mpp
-* timing
+| Library        | Variable |
+|----------------|----------|
+| abl            |          |
+| par_abl        |          |
+| phycst         |          |
+| dom_oce        | tmask    |
+| sbc_oce        | ght_abl  |
+|                | ghw_abl  |
+|                | e3t_abl  |
+|                | e3w_abl  |
+|                | jpka     |
+|                | jpkam1   |
+| sbcblk         |          |
+| prtctl         |          |
+| iom            |          |
+| in_out_manager |          |
+| lib_mpp        |          |
+| timing         |          |
 
 ## abl_step
 
