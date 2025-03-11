@@ -74,4 +74,11 @@ None
 
 ### Called from
 
+abl_zdf_tke subroutine (same module)
+
 ### Arguments
+
+|        | smooth_pblh (definition) | abl_zdf_tke (call) |
+| ------ |--------------------------|--------------------|
+| In     | msk                      | msk_abl            |
+| In/out | pvar2d                   | pblh               |
