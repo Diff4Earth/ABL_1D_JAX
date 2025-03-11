@@ -26,11 +26,23 @@
 sbc_abl.F90
 
 ### Arguments
-In
+|        | abl_stp (definition) | sbc_abl (call) |
+| ------ |----------------------|----------------|
+| In     | kt                   | kt             |
+|        | psst                 | sst_m          |
+|        | pssu                 | ssu_m          |
+|        | pssv                 | ssv_m          |
+|        | pssq                 | zssq           |
+|        | pu_dta               | sf(jp_wndi)    |
+|        | pv_dta               | sf(jp_wndj)    |
+|        | pt_dta               | sf(jp_tair)    |
+|        | pq_dta               | sf(jp_humi)    |
+|        | pslp_dta             | sf(jp_slp)     |
+|        | pgu_dta              | sf(jp_hpgi)    |
+|        | pgv_dta              | sf(jp_hpgj)    |
+| In/out |                      |                |
+| Out    |                      |                |
 
-In/out
-
-Out
 
 
 ## abl_zdf_tke
