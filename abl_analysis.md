@@ -22,3 +22,12 @@
 |                | e3w_abl  |
 |                | jpka     |
 
+## abl_alloc
+
+### Called from
+
+`routine called by nemo_init in nemogcm.F90`
+
+### Arguments
+
+None
