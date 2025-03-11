@@ -1,8 +1,6 @@
 # Analysis of ablmod.F90 module
 
-## abl_step
-
-### Dependencies
+## Module dependencies
 * abl
 * par_abl
 * phycst
@@ -21,6 +19,8 @@
 * in_out_manager
 * lib_mpp
 * timing
+
+## abl_step
 
 ### Called from
 sbc_abl.F90
@@ -63,15 +63,11 @@ sbc_abl.F90
 
 ## abl_zdf_tke
 
-### Dependencies
-
 ### Called from
 
 ### Arguments
 
 ## smooth_pblh
-
-### Dependencies
 
 ### Called from
 
