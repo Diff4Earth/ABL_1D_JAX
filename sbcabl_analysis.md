@@ -1,4 +1,5 @@
 # Analysis of sbcabl.F90 module
+Ocean forcing:  momentum, heat and freshwater flux formulation derived from an ABL model
 
 ## Module dependencies
 | Library        | Variable |
@@ -28,6 +29,7 @@
 | sbc_ice|vtau_ice |
 
 ## Subroutine sbc_abl_init
+Initialization of ABL model based on namelist options
 
 ### Called from
 sbcmod.F90 (src/OCE/SBC)
@@ -38,6 +40,7 @@ sbcmod.F90 (src/OCE/SBC)
 - initialize variables of ABL model
 
 ## Subroutine sbc_abl
+driver for the computation of momentum, heat and freshwater fluxes over ocean via the ABL model
 
 ### Called from
 sbcmod.F90 (src/OCE/SBC)
