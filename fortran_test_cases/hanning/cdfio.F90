@@ -446,7 +446,7 @@ CONTAINS
           istatus = NF90_DEF_VAR(kout, sdtyvar(jv)%cname, iprecision, iidims(1:idims) ,kidvo(jv) )
 #endif
           ! add attributes
-          istatus = putatt(sdtyvar(jv), kout, kidvo(jv), cdglobal=cdglobal)
+          !istatus = putatt(sdtyvar(jv), kout, kidvo(jv), cdglobal=cdglobal)
           createvar=istatus
        ENDIF
     END DO

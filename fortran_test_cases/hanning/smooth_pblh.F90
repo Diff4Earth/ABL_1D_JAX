@@ -3,9 +3,10 @@ PROGRAM smooth_2Dvar
   !!                       *** smooth_2Dvar
   !! This program applies a hanning filter on a 2D field
   !!======================================================================
-
-  IMPLICIT NONE
-
+  USE cdfio
+  USE netcdf
+  USE par_kind
+  
   INTEGER(KIND=4)                           :: narg, iargc, ijarg  
   CHARACTER(LEN=256)                        :: cf_tfil , cf_mfil  
   CHARACTER(LEN=256)                        :: cn_var, cn_varm
@@ -16,17 +17,18 @@ PROGRAM smooth_2Dvar
   CHARACTER(LEN=256)                        :: cllong_name        !     "      long name
   CHARACTER(LEN=256)                        :: cglobal            !     "      global 
   CHARACTER(LEN=256)                        :: clshort_name       !     "      short name
+  REAL(KIND=4)                              :: zspval             ! missing value
   INTEGER(KIND=4)                           :: ncout           ! ncid of output file
-  INTEGER(KIND=4), ALLOCATABLE, DIMENSION(:):: id_varout  
+  INTEGER(KIND=4)                           :: id_varout
   REAL(KIND=4), DIMENSION(:,:), ALLOCATABLE :: zmask
+  REAL(KIND=4), DIMENSION(:,:), ALLOCATABLE :: zmaskm1
   REAL(KIND=4), DIMENSION(:,:), ALLOCATABLE :: zv
+  INTEGER(KIND=4) :: nid_x, nid_y, nid_t
+  INTEGER(KIND=4)    :: istatus, ierr
   CHARACTER(LEN=256) :: cn_x='x'               !: longitude, I dimension
   CHARACTER(LEN=256) :: cn_y='y'               !: latitude,  J dimension
   CHARACTER(LEN=256) :: cn_t='time_counter'    !: time dimension
   CHARACTER(LEN=256) :: cf_out='smooth.nc' ! output file name
-
-  USE cdfio
-  USE par_kind
 
   narg= iargc()
   IF ( narg == 0 ) THEN
@@ -67,13 +69,28 @@ PROGRAM smooth_2Dvar
 
   ! Allocate arrays
   ALLOCATE (zmask(npiglo,npjglo) )
+  ALLOCATE (zmaskm1(npiglo,npjglo) )
   ALLOCATE (zv(npiglo,npjglo) )
 
-  CALL smooth_pblh( zv, zmask )
+  zv = getvar(cf_tfil, cn_var, 1, npiglo, npjglo         )
+  zmask = getvar(cf_mfil, cn_varm, 1, npiglo, npjglo         )
 
-  ierr = putvar(ncout , id_varout(1), zv , 0, jpiglo, jpjglo )
+  DO jj = 1, npjglo; DO ji = 1, npiglo
+        IF ( zmask(ji,jj) > 0 ) THEN
+                zmaskm1(ji,jj)=0
+        ELSE
+                zmaskm1(ji,jj)=1
+        END IF
+  END DO   ;   END DO
 
-  ierr = closeout(ncout )
+  CALL smooth_pblh( zv,  zmask )
+
+  istatus=NF90_PUT_VAR(ncout,id_varout, zv, start = (/ 1, 1, 1 /), count = (/ npiglo, npjglo, 1 /))
+  IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in put var :", NF90_STRERROR(istatus); END IF
+
+  istatus=NF90_CLOSE(ncout)
+  IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in close :", NF90_STRERROR(istatus); END IF
+
 
 CONTAINS
 
@@ -90,26 +107,19 @@ CONTAINS
     INTEGER(KIND=4) :: jv   ! dummy loop index
     !!----------------------------------------------------------------------
     ! prepare output variables
-    ALLOCATE (id_varout(1), stypvar(1) )
-    ierr=getvaratt (cf_tfil  , cn_var, clunits, zspval, cllong_name, clshort_name)
 
-    ! define new variables for output 
-    stypvar(1)%rmissing_value    = 99999.
-    stypvar(1)%scale_factor      = 1.
-    stypvar(1)%add_offset        = 0.
-    stypvar(1)%savelog10         = 0.
-    stypvar(1)%conline_operation = 'N/A'
+    istatus = NF90_CREATE(cf_out,NF90_CLOBBER,ncout)
+    IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in Create :", NF90_STRERROR(istatus); END IF
+    istatus = NF90_DEF_DIM(ncout, cn_x, npiglo, nid_x)
+    IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in Def Dim x :", NF90_STRERROR(istatus); END IF
+    istatus = NF90_DEF_DIM(ncout, cn_y, npjglo, nid_y)
+    IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in Def Dim y :", NF90_STRERROR(istatus); END IF
+    istatus = NF90_DEF_DIM(ncout,cn_t,NF90_UNLIMITED, nid_t)
+    IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in Def Dim t :", NF90_STRERROR(istatus); END IF
+    istatus = NF90_DEF_VAR(ncout, 'degraded_'//TRIM(cn_var), NF90_DOUBLE, (/ nid_x, nid_y, nid_t /) ,id_varout )
+    IF ( istatus /= NF90_NOERR) THEN; PRINT *, " Error in Create var :", NF90_STRERROR(istatus); END IF
+    istatus = nf90_enddef(ncout)
 
-    stypvar(1)%cunits         = TRIM(clunits)
-    stypvar(1)%valid_min      = -100000.
-    stypvar(1)%valid_max      =  100000.
-    stypvar(1)%cname          = 'degraded_'//TRIM(cv_nam)
-    stypvar(1)%clong_name     = 'degraded '//TRIM(cllong_name)
-    stypvar(1)%cshort_name    = 'degraded_'//TRIM(clshort_name)
-
-    ncout = create      (cf_out, cf_tfil, npiglo,    npjglo, 0,          ld_nc4=.False. )
-    ierr  = createvar   (ncout,  stypvar, 1, 1,    id_varout , ld_nc4=.False. )
-    ierr  = putheadervar(ncout,  cf_tfil, npiglo,    npjglo, 0 )
   END SUBROUTINE CreateOutput
 
 !===================================================================================================
@@ -123,12 +133,12 @@ CONTAINS
       !!
       !! ---------------------------------------------------------------------
 
-      REAL(wp), DIMENSION(A2D(1)), INTENT(in   ) :: msk
-      REAL(wp), DIMENSION(A2D(1)), INTENT(inout) :: pvar2d
+      REAL(kind=4), DIMENSION(npiglo,npjglo), INTENT(in   ) :: msk
+      REAL(kind=4), DIMENSION(npiglo,npjglo), INTENT(inout) :: pvar2d
       INTEGER                                    :: ji,jj
-      REAL(wp)                                   :: smth_a, smth_b
-      REAL(wp), DIMENSION(A2D(1))                :: zdX,zdY,zFX,zFY
-      REAL(wp)                                   :: zumsk,zvmsk
+      REAL(kind=4)                                   :: smth_a, smth_b
+      REAL(kind=4), DIMENSION(npiglo,npjglo)         :: zdX,zdY,zFX,zFY
+      REAL(kind=4)                                   :: zumsk,zvmsk
 
       !!=========================================================
       !!
