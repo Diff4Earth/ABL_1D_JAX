@@ -21,3 +21,11 @@ For the test case we compute the Hanning Filter on boundary layer height from ER
 
 The person doing this translation will need solid knowledge of Fortran and especially NEMO convention and functions. Why people do double loops in (x, y) dimension ordering the indexes like (y_min, y_max, x_min, x_max)...
 
+# ABL in JAX
+The set of initial equations in a single-column approach could be write more directly in JAX
+
+There is a set of vertical diffusion equation
+<img width="389" alt="VerticalDiffEquation" src="https://github.com/user-attachments/assets/acb9d01f-bb50-4933-8f2e-5a9413a2b0a1" />
+
+TKE closure
+
