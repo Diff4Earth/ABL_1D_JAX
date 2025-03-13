@@ -9,7 +9,8 @@ The ABL_1D_JAX project as part of the 2025 IGE Jaxathon. This repo contains our 
 
 
 # ⛳️ Test Case
-In order to validate the first function translation (Hanning 2D filter computation), we extract this function from the ABL code in Fortran (code in `fortran_test_cases`).
+In order to validate the first function translation (Hanning 2D filter computation), we extract this function from the ABL code in Fortran (code in [`fortran_test_cases`](fortran_test_cases/hanning/README.md).
+
 We then translate this function in both python and JAX (running either on GPUs and CPUs)
 
 For the test case we compute the Hanning Filter on boundary layer height from ERA5
