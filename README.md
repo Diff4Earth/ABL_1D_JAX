@@ -8,7 +8,7 @@ The ABL_1D_JAX project as part of the 2025 IGE Jaxathon. This repo contains our 
 - sbcabl_analysis.md: description of sbcabl_analysis fortran code
 
 
-# Test Case
+# ⛳️ Test Case
 In order to validate the first function translation (Hanning 2D filter computation), we extract this function from the ABL code in Fortran (code in `fortran_test_cases`).
 We then translate this function in both python and JAX (running either on GPUs and CPUs)
 
@@ -23,17 +23,17 @@ The environment to install the libraries necessary for the test case in Jax and 
 
 The `smooth_pblh_jax.py` code contains the JAX script. 
 
-## Code line-by-line comparison
+## 💻 Code line-by-line comparison
 
 The main work was to transform nested loops into matrix operations in python.
 
 ![](code-fortran-jax.png)
 
-# Conclusion from the project
+# 🆘 Conclusion from the project
 
 The person doing this translation will need solid knowledge of Fortran and especially NEMO convention and functions. Why people do double loops in (x, y) dimension ordering the indexes like (y_min, y_max, x_min, x_max)... 
 
-## ABL in JAX
+## 💡 ABL in JAX
 The set of initial equations in a single-column approach could be written more directly in JAX.
 There is a set of vertical diffusion equation
 
