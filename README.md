@@ -1,12 +1,11 @@
 # ABL_1D_JAX
-WIP materials for the ABL_1D_JAX project as part of the 2025 IGE Jaxathon.
+The ABL_1D_JAX project as part of the 2025 IGE Jaxathon. This repo contains our roadmap for a potential translation of the ABL-1D model from Fortran to Jax, scripts for a small test case, in Fortran, Python and Jax and potential recommandations. 
 
 # Contents
 - abl_analysis.md: description of abl_analysis fortran code
 - ablmod_analysis.md: description of ablmod_analysis fortran code
 - par_abl_analysis.md: description of parbal_analysis fortran code
 - sbcabl_analysis.md: description of sbcabl_analysis fortran code
-
 
 
 # Test Case
@@ -16,12 +15,19 @@ We then translate this function in both python and JAX (running either on GPUs a
 For the test case we compute the Hanning Filter on boundary layer height from ERA5
 ![](blh_test.png)
 
+## Jax implementation
+
+The environment to install the libraries necessary for the test case in Jax and visualization `hanning_gpu_vs_cpu.ipynb' can be installed with the `jax.yaml` environement file.
+
+`conda env create -f jax.yaml`
+
+The `smooth_pblh_jax.py` code contains the JAX script. 
 
 # Conclusion from the project
 
-The person doing this translation will need solid knowledge of Fortran and especially NEMO convention and functions. Why people do double loops in (x, y) dimension ordering the indexes like (y_min, y_max, x_min, x_max)...
+The person doing this translation will need solid knowledge of Fortran and especially NEMO convention and functions. Why people do double loops in (x, y) dimension ordering the indexes like (y_min, y_max, x_min, x_max)... 
 
-# ABL in JAX
+## ABL in JAX
 The set of initial equations in a single-column approach could be written more directly in JAX.
 There is a set of vertical diffusion equation
 
