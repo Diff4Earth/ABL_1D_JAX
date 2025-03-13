@@ -15,9 +15,9 @@ We then translate this function in both python and JAX (running either on GPUs a
 For the test case we compute the Hanning Filter on boundary layer height from ERA5
 ![](blh_test.png)
 
-## Jax implementation
+## 🚀 Jax implementation
 
-The environment to install the libraries necessary for the test case in Jax and visualization `hanning_gpu_vs_cpu.ipynb' can be installed with the `jax.yaml` environement file.
+The environment to install the libraries necessary for the test case in Jax and visualization `hanning_gpu_vs_cpu.ipynb` can be installed with the [`jax.yaml`](jax.yaml) environment file.
 
 `conda env create -f jax.yaml`
 
