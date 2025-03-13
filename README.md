@@ -23,6 +23,9 @@ The environment to install the libraries necessary for the test case in Jax and 
 
 The `smooth_pblh_jax.py` code contains the JAX script. 
 
+## Code line-by-line comparison
+
+
 # Conclusion from the project
 
 The person doing this translation will need solid knowledge of Fortran and especially NEMO convention and functions. Why people do double loops in (x, y) dimension ordering the indexes like (y_min, y_max, x_min, x_max)... 
