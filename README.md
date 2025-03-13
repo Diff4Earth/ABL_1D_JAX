@@ -25,6 +25,8 @@ The `smooth_pblh_jax.py` code contains the JAX script.
 
 ## Code line-by-line comparison
 
+The main work was to transform nested loops into matrix operations in python.
+
 ![](code-fortran-jax.png)
 
 # Conclusion from the project
