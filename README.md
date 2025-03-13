@@ -25,6 +25,7 @@ The `smooth_pblh_jax.py` code contains the JAX script.
 
 ## Code line-by-line comparison
 
+![](code-fortran-jax.png)
 
 # Conclusion from the project
 
