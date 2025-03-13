@@ -17,11 +17,11 @@ For the test case we compute the Hanning Filter on boundary layer height from ER
 
 ## 🚀 Jax implementation
 
-The environment to install the libraries necessary for the test case in Jax and visualization `hanning_gpu_vs_cpu.ipynb` can be installed with the [`jax.yaml`](jax.yaml) environment file.
+The environment to install the libraries necessary for the test case in Jax and visualization notebook [`hanning_gpu_vs_cpu.ipynb`](hanning_jax_vs_fortran.ipynb) can be installed with the [`jax.yaml`](jax.yaml) environment file.
 
 `conda env create -f jax.yaml`
 
-The `smooth_pblh_jax.py` code contains the JAX script. 
+The [`smooth_pblh_jax.py`](smooth_pblh_jax.py) code contains the JAX script. 
 
 ## 💻 Code line-by-line comparison
 
